@@ -18,7 +18,7 @@ public class ProductDetail extends BaseEntity {
 
     private String description;
 
-    @OneToOne
+    @OneToOne(optional = false)
     @JoinColumn(name = "product_number")
     private Product product;
 
