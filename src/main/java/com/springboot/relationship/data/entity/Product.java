@@ -5,11 +5,11 @@ import lombok.*;
 
 @Getter
 @Setter
-@ToString
 @Entity
 //@AllArgsConstructor // 모든 필드를 매개변수로 갖는 생성자 자동 생성
 @NoArgsConstructor // 매개변수가 없는 생성자 자동 생성
 //@RequiredArgsConstructor 필드 중 final이나 @NotNull이 설정된 매개변수로 갖는 생성자 자동 생성
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "product")
 public class Product extends BaseEntity{
@@ -28,6 +28,11 @@ public class Product extends BaseEntity{
     private Integer stock;
 
     @OneToOne(mappedBy = "product")
-    @ToString.Exclude
+    @ToString.Exclude // You can prevent stackoverflowerror.
     private ProductDetail productDetail;
+
+    @ManyToOne
+    @JoinColumn(name = "provider_id")
+    @ToString.Exclude
+    private Provider provider;
 }
