@@ -2,13 +2,13 @@ package com.springboot.relationship.data.repository;
 
 import com.springboot.relationship.data.entity.Producer;
 import com.springboot.relationship.data.entity.Product;
+import jakarta.transaction.Transactional;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 public class ProducerRepositoryTest {
@@ -20,6 +20,7 @@ public class ProducerRepositoryTest {
     ProductRepository productRepository;
 
     @Test
+    @Transactional
     @DisplayName("TEST 데이터 저장")
     // disable rollback
     @Rollback(value = false)
@@ -38,6 +39,7 @@ public class ProducerRepositoryTest {
         producer2.addProduct(product3);
 
         producerRepository.saveAll(Lists.newArrayList(producer1, producer2));
+
         System.out.println(producerRepository.findById(1L).get().getProducts());
     }
 

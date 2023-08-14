@@ -22,4 +22,6 @@ public class ProductDetail extends BaseEntity {
     @JoinColumn(name = "product_number")
     private Product product;
 
+    // Using @EqualsAndHashCode for JPA entities is not recommended.
+    // It can cause severe performance and memory consumption issues.
 }
